@@ -50,6 +50,8 @@ class ReflexAgent(Agent):
         "Add more of your code here if you want to"
 
         return legalMoves[chosenIndex]
+    
+
 
     def evaluationFunction(self, currentGameState, action):
         """
@@ -100,7 +102,6 @@ def betterEvaluationFunction(currentGameState):
         return float("inf")
     if currentGameState.isLose():
         return -float("inf")
-
     newPos = currentGameState.getPacmanPosition()
     newFood = currentGameState.getFood()
     newGhostStates = currentGameState.getGhostStates()
@@ -201,6 +202,8 @@ class MinimaxAgent(MultiAgentSearchAgent):
             return minEval, bestAction
 
         _, action = minimax(0, 0, gameState)
+        if action == None:  # Nếu không có hành động hợp lệ
+            return Directions.STOP  # Chọn STOP làm hành động mặc định
         return action
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
@@ -255,6 +258,8 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
 
         # Initial call to alphaBeta function from the root node
         _, action = alphaBeta(gameState, 0, 0, float("-inf"), float("inf"))
+        if action == None:  # Nếu không có hành động hợp lệ
+            return Directions.STOP  # Chọn STOP làm hành động mặc định
         return action
 
 
@@ -307,6 +312,8 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
 
         # Initial call to expectimax from the root node
         _, action = expectimax(gameState, 0, 0)
+        if action == None:  # Nếu không có hành động hợp lệ
+            return Directions.STOP  # Chọn STOP làm hành động mặc định
         return action
 
 
